@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="default">
+
+<head>
+	<title>User Diary</title>
+</head>
+
+<body>
+	<div layout:fragment="content">
+		<div align="center">
+			<h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
+            <h2>This is your Diary</h2><br/>
+            <form class="form-diary" th:action="@{/jurnal}" method="post" th:object="${diary}">
+           <label>Diary:</label>
+            <textarea rows="15" cols="35" th:field="*{diary}"></textarea>
+                <br/>
+                 <button class="btn btn-md btn-success btn-block" type="submit">Save</button>    
+  		  </form>
+  		  <br/>
+        </div>
+    </body>
+</html> 
