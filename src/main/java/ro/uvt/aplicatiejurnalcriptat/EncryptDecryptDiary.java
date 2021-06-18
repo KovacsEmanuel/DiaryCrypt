@@ -40,7 +40,6 @@ public class EncryptDecryptDiary {
 	public static String encryption(String algorithm, String currentDiary, SecretKey key, IvParameterSpec ivParameter)
 			throws NoSuchPaddingException, NoSuchAlgorithmException, InvalidAlgorithmParameterException,
 			InvalidKeyException, BadPaddingException, IllegalBlockSizeException {
-
 		Cipher cipher = Cipher.getInstance(algorithm);
 		cipher.init(Cipher.ENCRYPT_MODE, key, ivParameter);
 		byte[] cipherText = cipher.doFinal(currentDiary.getBytes());

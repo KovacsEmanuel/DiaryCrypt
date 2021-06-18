@@ -62,29 +62,22 @@ public class CustomUserDetailsService implements UserDetailsService {
 		repoUser.save(user);
 	}
 
-	public void saveDiary(Diary diary) throws NoSuchAlgorithmException, InvalidKeyException, NoSuchPaddingException,
+	public void saveDiary(Diary diary, User user) throws NoSuchAlgorithmException, InvalidKeyException, NoSuchPaddingException,
 			InvalidAlgorithmParameterException, BadPaddingException, IllegalBlockSizeException,
 			InvalidKeySpecException {
 		String currentDiary = diary.getDiary();
-		byte[] salt = new byte[16];
-		RANDOM.nextBytes(salt);
-		String currentSalt = Base64.getEncoder().encodeToString(salt);
-		User password = new User();
-		password.getPassword();
-		String pass = password.toString();
-		SecretKey key = EncryptDecryptDiary.getKeyFromPassword(pass, currentSalt);
+		String pass = user.getEmail();
+		SecretKey key = EncryptDecryptDiary.getKeyFromPassword(pass, user.getSalt());
 		IvParameterSpec ivParameterSpec = EncryptDecryptDiary.generateIv();
 		String algorithm = "AES/CBC/PKCS5Padding";
 		String cipherText = EncryptDecryptDiary.encryption(algorithm, currentDiary, key, ivParameterSpec);
-
+		
 		Diary di = new Diary();
 		di.setDiary(cipherText);
-		String plainText = EncryptDecryptDiary.decryption(algorithm, cipherText, key, ivParameterSpec);
+		di.setEmail(diary.getEmail());
+		di.setIv(ivParameterSpec.getIV());
 
-		
 		repoDiary.save(di);
-		
-
 	}
 
 	@Override

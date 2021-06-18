@@ -9,9 +9,11 @@ public class Diary {
 
 	private String diary;
 	
-	private IvParameterSpec ivParameterSpec;
+	private byte[] iv;
 	
 	private String plainText;
+	
+	private String email;
 
 	public String getPlainText() {
 		return plainText;
@@ -21,12 +23,12 @@ public class Diary {
 		this.plainText = plainText;
 	}
 
-	public IvParameterSpec getIvParameterSpec() {
-		return ivParameterSpec;
+	public byte[] getIv() {
+		return iv;
 	}
 
-	public void setIvParameterSpec(IvParameterSpec ivParameterSpec) {
-		this.ivParameterSpec = ivParameterSpec;
+	public void setIv(byte[] iv) {
+		this.iv = iv;
 	}
 
 	public String getDiary() {
@@ -37,4 +39,12 @@ public class Diary {
 		this.diary = diary;
 	}
 
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	
 }

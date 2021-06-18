@@ -1,33 +1,44 @@
 <!DOCTYPE html>
-<html lang="en"
-      xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="default">
-    <head>
-        <title>Signup</title>
-    </head>
-    <body>
-        <div layout:fragment="content">
-            <form class="form-signin" th:action="@{/signup}" method="post">
-                <h1 class="h3 mb-3 font-weight-normal">Signup Here</h1>
-                <div th:if="${param.error}">
-                    Invalid email and password.
-                </div>
-                <div th:if="${param.logout}">
-                    You have been logged out.
-                </div>
-                <label for="inputUsername" class="sr-only">Username</label>
-                <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Username" required="" />
-                <label for="inputPassword" class="sr-only">Password</label>
-                <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required="" />
-                <label for="inputFullname" class="sr-only">Full Name</label>
-                <input type="text" name="fullname" id="inputEmail" class="form-control" placeholder="Fullname" required="" />
-                <button class="btn btn-lg btn-primary btn-block" type="submit">Sign Up</button>
-            </form>
-            <form class="form-signin" th:action="@{/login}" method="get">
-                <button class="btn btn-md btn-success btn-block" type="Submit">Sign In</button>
-            </form>
-        </div>
-    </body>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<div th:replace="fragments/navigation"></div>
+</head>
+
+<body>
+	<div class="container">
+		<form class="mb-3" th:action="@{/signup}" method="post" th:object="${user}">
+			<div class="mb-3">
+				<label for="inputUsername" class="form-label">Username</label>
+				<input type="email" name="email" id="inputEmail" class="form-control" placeholder="Username"
+					required="" />
+			</div>
+			<div class="mb-3">
+				<label for="inputPassword" class="form-label">Password</label>
+				<input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password"
+					required="" />
+			</div>
+			<div class="mb-3">
+				<label for="inputFullname" class="form-label">Full name</label>
+				<input type="text" name="fullname" id="inputEmail" class="form-control" placeholder="Full name"
+					required="" />
+			</div>
+			
+			<div class="mb-3" th:if="${param.error}">
+				Invalid email and password.
+			</div>
+			
+			<div class="mb-3" th:if="${#fields.hasErrors('email')}">
+				This username is already taken.
+			</div>
+			
+			<button class="btn btn-md btn-primary btn-block w-50 d-grid mx-auto" type="submit">Signup</button>
+		</form>
+		
+		<form th:action="@{/login}" method="get">
+			<button class="btn btn-md btn-success btn-block w-50 d-grid mx-auto" type="submit">Sign in</button>
+		</form>
+	</div>
+</body>
+
 </html>

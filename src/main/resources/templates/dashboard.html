@@ -1,16 +1,15 @@
 <!DOCTYPE html>
-<html lang="en"
-      xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="default">
-    <head>
-        <title>Dashboard</title>
-    </head>
-    <body>
-        <div layout:fragment="content">
-            <h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
-            <h2>This is your Admin Dashboard</h2>
-        </div>
-    </body>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<div th:replace="fragments/navigation"></div>
+</head>
+
+<body>
+	<div class="container">
+		<h1>Hello [[${#httpServletRequest.remoteUser}]]!</h1>
+        <h5>This is your Admin Dashboard...</h5>
+    </div>
+</body>
+
 </html>

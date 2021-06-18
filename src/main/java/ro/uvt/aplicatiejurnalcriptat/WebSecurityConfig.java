@@ -38,17 +38,27 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity httpSecurity) throws Exception {
-		httpSecurity.authorizeRequests().antMatchers("/").permitAll().antMatchers("/login").permitAll().antMatchers("/signup")
-				.permitAll().antMatchers("/dashboard/**").hasAuthority("ADMIN").anyRequest().authenticated().and()
-				.csrf().disable().formLogin().successHandler(successHandler).loginPage("/login")
-				.failureUrl("/login?error=true").usernameParameter("email").passwordParameter("password").and().logout()
-				.logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/").and()
-				.exceptionHandling();
+		httpSecurity.authorizeRequests()
+				.antMatchers("/webjars/**", "/images/**").permitAll()
+				.antMatchers("/").permitAll()
+				.antMatchers("/login").permitAll()
+				.antMatchers("/signup").permitAll()
+				.antMatchers("/home").permitAll()
+				.antMatchers("/dashboard/**").hasAuthority("ADMIN")
+				.anyRequest().authenticated().and().csrf().disable().formLogin()
+				.successHandler(successHandler)
+				.loginPage("/login")
+				.failureUrl("/login?error=true")
+				.usernameParameter("email")
+				.passwordParameter("password")
+				.and().logout()
+				.logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/")
+				.and().exceptionHandling();
 	}
 
 	@Override
 	public void configure(WebSecurity webSecurity) throws Exception {
-		webSecurity.ignoring().antMatchers("/resources/**", "/static/**", "/css/**", "/js/**", "/images/**");
+		webSecurity.ignoring().antMatchers("/webjars/**");
 	}
 
 }

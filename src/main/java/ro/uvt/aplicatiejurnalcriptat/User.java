@@ -1,6 +1,8 @@
 
 package ro.uvt.aplicatiejurnalcriptat;
 
+import java.security.SecureRandom;
+import java.util.Base64;
 import java.util.Set;
 
 import org.springframework.data.annotation.Id;
@@ -20,7 +22,18 @@ public class User {
 	private String fullName;
 
 	private boolean enabled;
+	
+	private String salt;
 
+	public User() {
+		SecureRandom random = new SecureRandom();
+		
+		byte[] bytes = new byte[16];
+		random.nextBytes(bytes);
+		
+		salt = Base64.getEncoder().encodeToString(bytes);
+	}
+	
 	@DBRef
 	private Set<Role> roles;
 
@@ -71,4 +84,21 @@ public class User {
 	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
 	}
+
+	public String getFullName() {
+		return fullName;
+	}
+
+	public void setFullName(String fullName) {
+		this.fullName = fullName;
+	}
+
+	public String getSalt() {
+		return salt;
+	}
+
+	public void setSalt(String salt) {
+		this.salt = salt;
+	}
+	
 }

@@ -1,17 +1,18 @@
 <!DOCTYPE html>
-<html lang="en"
-      xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="default">
-    <head>
-        <title>Diary</title>
-    </head>
-    <body>
-        <div layout:fragment="content">
-            <h1>Welcome!</h1>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
-        <p>Click <a th:href="@{/hello}">here</a> to see a greeting.</p>
-        </div>
-    </body>
-</html>
+<head>
+	<div th:replace="fragments/navigation"></div>
+</head>
+
+<body>
+	<div class="container">
+		<div class="position-absolute top-50 start-50 translate-middle">
+			<h1>Welcome to DiaryCrypt!</h1>
+			<h5>Click <a href="/login">here</a> to login...</h5>
+		</div>
+		<div class="position-absolute bottom-0 start-50 translate-middle-x">
+			<span>Kovacs Emanuel</span>
+		</div>
+	</div>
+</body>

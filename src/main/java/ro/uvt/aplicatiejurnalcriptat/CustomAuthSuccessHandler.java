@@ -26,7 +26,7 @@ public class CustomAuthSuccessHandler implements AuthenticationSuccessHandler {
 			}
 			for (GrantedAuthority grantedAuth : authentication.getAuthorities()) {
 				if ("USER".equals(grantedAuth.getAuthority())) {
-					response.sendRedirect("/jurnal");
+					response.sendRedirect("/journal");
 				}
 			}
 		}
